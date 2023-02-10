@@ -10,7 +10,8 @@ export const hoverPointer = css`
 
 export interface TaskBoard {
   title: string;
-  tasks: Task[]
+  sourceOfTasks: string | null;
+  tasks: Task[];
 }
 
 export interface Task {
@@ -22,6 +23,7 @@ export interface Task {
 export const boards: Array<TaskBoard> = [
   {
     title: "Backlog",
+    sourceOfTasks: null,
     tasks: [
       {
         id: 1,
@@ -37,6 +39,7 @@ export const boards: Array<TaskBoard> = [
   },
   {
     title: "Ready",
+    sourceOfTasks: "Backlog",
     tasks: [
       {
         id: 3,

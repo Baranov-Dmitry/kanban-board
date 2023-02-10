@@ -9,9 +9,15 @@ const Boards = () => {
 
   return (
     <BoardsContainer>
-      {boards ? boards.map(board => (
-        <BoardContainer title={board.title} tasks={board.tasks} />
-      )) : null}
+      {boards ? boards.map(board => {
+        console.log(board);
+        if (board.sourceOfTasks !== null) {
+          return <BoardContainer key={board.title} sourceOfTasks={board.sourceOfTasks} title={board.title} tasks={board.tasks}
+            sourseTaskBoard={boards.filter(item => item.sourceOfTasks === board.sourceOfTasks)} />
+        } else {
+          return <BoardContainer key={board.title} sourceOfTasks={board.sourceOfTasks} title={board.title} tasks={board.tasks} />
+        }
+      }) : null}
     </BoardsContainer>
   )
 }

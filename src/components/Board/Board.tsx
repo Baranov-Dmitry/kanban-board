@@ -3,9 +3,9 @@ import { Task } from '../../contants'
 import styled from "styled-components";
 import { hoverPointer } from "../../contants";
 
-const Board = ({ id, text, done }: Task) => {
+const Board = ({ text }: { text: string }) => {
   return (
-    <BoardsTaskItem key={id}>
+    <BoardsTaskItem>
       {text}
     </BoardsTaskItem>
   )
@@ -15,7 +15,7 @@ export const BoardsTaskItem = styled.div`
   background-color: #ffffff;
   margin-top: 9px;
   margin-bottom: 15px;
-  padding-top: 6px;
+  padding-top: 7px;
   padding-bottom: 9px;
   padding-left: 9px;
   padding-right: 6px;
