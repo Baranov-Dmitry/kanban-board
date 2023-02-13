@@ -5,7 +5,6 @@ import AddTask from '../AddTask/AddTask';
 import Board from '../Board/Board';
 
 const BoardContainer = ({ title, sourceOfTasks, tasks, sourseTaskBoard }: any) => {
-  console.log(title, sourceOfTasks, sourseTaskBoard)
   return (
     <BoardsTaskContainer key={title}>
       <BoardsTaskTitle>
@@ -14,7 +13,7 @@ const BoardContainer = ({ title, sourceOfTasks, tasks, sourseTaskBoard }: any) =
       {(tasks as Task[]).map(task => (
         <Board key={task.id} text={task.text} />
       ))}
-      <AddTask>{sourseTaskBoard}</AddTask>
+      <AddTask boardName={title} sourceOfTasks={sourceOfTasks}></AddTask>
     </BoardsTaskContainer>
   )
 }

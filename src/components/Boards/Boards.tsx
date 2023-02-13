@@ -2,22 +2,19 @@ import React, { useState } from 'react'
 import { boards as boardsSchema, TaskBoard } from "../../contants"
 import styled from "styled-components";
 import BoardContainer from '../BoardContainer/BoardContainer';
+import { useSelector } from 'react-redux/es/exports';
+import { selectBoards } from '../reducer/boardsSlice';
+
 
 const Boards = () => {
 
-  const [boards, setBoards] = useState<Array<TaskBoard>>(boardsSchema)
+  const boards = useSelector((state: BoardsState) => state.boardsStore.boards)
 
   return (
     <BoardsContainer>
-      {boards ? boards.map(board => {
-        console.log(board);
-        if (board.sourceOfTasks !== null) {
-          return <BoardContainer key={board.title} sourceOfTasks={board.sourceOfTasks} title={board.title} tasks={board.tasks}
-            sourseTaskBoard={boards.filter(item => item.sourceOfTasks === board.sourceOfTasks)} />
-        } else {
-          return <BoardContainer key={board.title} sourceOfTasks={board.sourceOfTasks} title={board.title} tasks={board.tasks} />
-        }
-      }) : null}
+      {boards.map(board => (
+        <BoardContainer key={board.title} {...board} />
+      ))}
     </BoardsContainer>
   )
 }

@@ -5,6 +5,7 @@ export const offsetPx = "19px";
 export const hoverPointer = css`
   &:hover {
     cursor: pointer;
+    box-shadow: 0px 0px 7px 1px rgb(34 60 80 / 32%);
   }
 `
 
@@ -15,7 +16,7 @@ export interface TaskBoard {
 }
 
 export interface Task {
-  id: number,
+  id: string,
   text: string,
   done: boolean
 }
@@ -26,12 +27,12 @@ export const boards: Array<TaskBoard> = [
     sourceOfTasks: null,
     tasks: [
       {
-        id: 1,
+        id: "1",
         text: "Login page – performance issues",
         done: false
       },
       {
-        id: 2,
+        id: "2",
         text: "Sprint bugfix",
         done: false
       },
@@ -42,17 +43,17 @@ export const boards: Array<TaskBoard> = [
     sourceOfTasks: "Backlog",
     tasks: [
       {
-        id: 3,
+        id: "3",
         text: "Shop page – performance issues",
         done: false
       },
       {
-        id: 4,
+        id: "4",
         text: "Checkout bugfix",
         done: false
       },
       {
-        id: 5,
+        id: "5",
         text: "Shop bug1",
         done: false
       },
