@@ -1,32 +1,24 @@
-import React, { useRef, useState } from 'react'
-import { useSelector } from 'react-redux';
+import React, { useState } from 'react'
 import { useDispatch } from 'react-redux/es/hooks/useDispatch';
 import styled from 'styled-components'
-import { hoverPointer, TaskBoard } from '../../contants';
-import { addNewTask } from '../reducer/boardsSlice';
-import FormSelect from './FormSelect';
-import GetTasks from './GetTasks';
+import { hoverPointer } from '../../contants';
+import { addNewTask, moveTask } from '../reducer/boardsSlice';
+import SelectDecorator from './SelectDecorator';
 import InputTask from './InputTask';
 
-
-const AddTask = ({ boardName, sourceOfTasks }: { boardName: string, sourceOfTasks: string }) => {
-
-  // if (sourceOfTasks !== null) {
-  //   const selectableTasks = useSelector((state: BoardsState) => state.boardsStore.boards.filter(board => board.title === sourceOfTasks))[0].tasks.map(task => ({ id: task.id, text: task.text }))
-  //   const valuesForSelect = selectableTasks.tasks.map(task => ({ id: task.id, text: task.text }))
-  // }
+const AddTask = ({ boardName, sourceOfTasks }: { boardName: string, sourceOfTasks: string | null }) => {
 
   const dispatch = useDispatch()
 
-  // if (childred.children !== undefined) {
-  //   console.log(childred.children)
-  // }
-
   const [showAddTask, setShowAddTask] = useState(false)
-
 
   const handleAdd = (text: string) => {
     dispatch(addNewTask({ boardName, text: text }))
+    setShowAddTask(prev => !prev)
+  }
+
+  const handleSelect = (id: string) => {
+    dispatch(moveTask({ id, from: sourceOfTasks, to: boardName, }))
     setShowAddTask(prev => !prev)
   }
 
@@ -35,8 +27,8 @@ const AddTask = ({ boardName, sourceOfTasks }: { boardName: string, sourceOfTask
       {!showAddTask
         ? <BoardsTaskButton onClick={() => setShowAddTask(prev => !prev)}>Add card</BoardsTaskButton>
         : sourceOfTasks === null
-          ? <InputTask handleAdd={(e) => { console.log(e) }} />
-          : <GetTasks id={sourceOfTasks} />
+          ? <InputTask handleAdd={handleAdd} />
+          : <SelectDecorator id={sourceOfTasks} handleSelect={handleSelect} />
       }
     </>
   )

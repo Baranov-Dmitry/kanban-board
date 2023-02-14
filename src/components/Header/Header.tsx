@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from 'react'
 import styled from "styled-components";
-import { offsetPx, hoverPointer } from "../../contants";
+import { offsetPx } from "../../contants";
 const arrowDown = require("../../images/arrow-down.png");
 const arrowUp = require("../../images/arrow-up.png");
 const userLogo = require('../../images/user-avatar.png')
@@ -10,6 +10,7 @@ const Header = () => {
     changing: false,
     show: false
   });
+
   const popUpMenu = useRef<HTMLDivElement>(null)
 
   const animate = (startTime: number) => {
@@ -47,8 +48,10 @@ const Header = () => {
       <HeaderTitle>Awesome Kanban Board</HeaderTitle>
       <HeaderLogoContainer>
         <HeaderBlueBG>
-          <img src={userLogo} alt="user" />
-          <img src={(showMenu.show || showMenu.changing) ? arrowUp : arrowDown} onClick={() => setShowMenu(prev => ({ ...prev, changing: !prev.changing }))} alt="arrow" />
+          <ContanerForClick onClick={() => setShowMenu(prev => ({ ...prev, changing: !prev.changing }))}>
+            <img src={userLogo} alt="user" />
+            <img src={(showMenu.show || showMenu.changing) ? arrowUp : arrowDown} alt="arrow" />
+          </ContanerForClick>
         </HeaderBlueBG>
         {(showMenu.show || showMenu.changing) &&
           <HeaderMenuContainer ref={popUpMenu}>
@@ -61,7 +64,16 @@ const Header = () => {
   )
 }
 
-export const HeaderContanier = styled.div`
+const ContanerForClick = styled.div`
+  display: flex;
+  align-items: center;
+
+  &:hover {
+    cursor: pointer;
+  }
+`
+
+const HeaderContanier = styled.div`
   width: 100%;
   height: 55px;
   background-color: #0067a3;
@@ -70,7 +82,7 @@ export const HeaderContanier = styled.div`
   justify-content: space-between;
 `;
 
-export const HeaderTitle = styled.span`
+const HeaderTitle = styled.span`
   font-family: "Roboto";
   font-weight: 400;
   font-size: 28px;
@@ -83,29 +95,26 @@ export const HeaderTitle = styled.span`
   }
 `;
 
-export const HeaderLogoContainer = styled.div`
+const HeaderLogoContainer = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
   margin-right: ${offsetPx};
   position: relative;
-
-  ${hoverPointer}
 `;
 
-export const HeaderArrow = styled.div`
+const HeaderArrow = styled.div`
   width: 24px;
   height: 24px;
   background-image: url(${arrowDown});
 `;
 
-export const HeaderMenuContainer = styled.div`
+const HeaderMenuContainer = styled.div`
   position: absolute;
   width: 134px;
   height: 60px;
   right: 0px;
   top: -15px;
-  /* bottom: -75px; */
   z-index: 1;
   background: #fff;
   border-radius: 5px;
@@ -133,7 +142,7 @@ const HeaderBlueBG = styled.div`
   z-index: 2;
 `
 
-export const HeaderMenuItem = styled.div`
+const HeaderMenuItem = styled.div`
   margin-top: 5px;
   margin-left: 8px;
 `;

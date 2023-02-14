@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
 import styled, { css } from 'styled-components';
 import { hoverPointer } from '../../contants';
+import { ButtonSubmit } from './InputTask';
+import { Error } from './InputTask'
 
-const Select = ({ label, values, onChange }: { label: string, values: { id: string, text: string }[], onChange: (e: any) => void }) => {
-  const [currentValue, setCurrentValue] = useState('');
-  const [open, setOpen] = useState(false);
+const SelectTask = ({ label, values, handleSelect }: { label: string, values: { id: string, text: string }[], handleSelect: (id: string) => void }) => {
+  const [currentValue, setCurrentValue] = useState('')
+  const [open, setOpen] = useState(false)
+  const [error, setError] = useState(false)
 
   const handleOpen = () => {
     setOpen(true);
@@ -17,30 +20,45 @@ const Select = ({ label, values, onChange }: { label: string, values: { id: stri
   const handleValueChange = (value: any) => {
     setCurrentValue(value);
   };
+
   const handleChange = (value: any) => {
     handleValueChange(value);
-    // call method, if it exists
-    if (onChange) onChange(value);
+
     // close, after all tasks are finished
     handleClose();
   };
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    if (currentValue === '') {
+      setError(true)
+      return
+    }
+
+    handleSelect(currentValue)
+    setError(false)
+  }
+
   return (
-    <SelectContainer>
-      <SelectLabelButton onClick={handleOpen}>
-        {currentValue !== "" ? currentValue : label}
-      </SelectLabelButton>
-      <DropdownStyle isVisible={open}>
-        {values.map((value) => (
-          <DropdownItem
-            onClick={() => handleChange(value.text)}
-            active={value.id === currentValue}
-            key={value.id}>
-            {value.text}
-          </DropdownItem>
-        ))}
-      </DropdownStyle>
-    </SelectContainer>
+    <form onSubmit={handleSubmit}>
+      <SelectContainer>
+        <SelectLabelButton onClick={handleOpen}>
+          {currentValue !== "" ? values.find(value => value.id === currentValue)?.text : label}
+        </SelectLabelButton>
+        <DropdownStyle isVisible={open}>
+          {values.map((value) => (
+            <DropdownItem
+              onClick={() => handleChange(value.id)}
+              active={value.id === currentValue}
+              key={value.id}>
+              {value.text}
+            </DropdownItem>
+          ))}
+        </DropdownStyle>
+      </SelectContainer>
+      {error && <Error>Please select an task</Error>}
+      <ButtonSubmit type='submit'>Submit</ButtonSubmit>
+    </form>
   );
 
 }
@@ -59,7 +77,9 @@ const SelectContainer = styled.div`
   margin: 0;
 `
 
-const SelectLabelButton = styled.button`
+const SelectLabelButton = styled.button.attrs({
+  type: 'button'
+})`
   width: 100%;
   background-color: #ffffff;
   margin-top: 9px;
@@ -85,6 +105,7 @@ const DropdownStyle = styled.div`
   background-color: #fff;
   border-radius: 5px;
   width: 100%;
+  z-index: 1;
 
   ${({ isVisible }: { isVisible: boolean }) =>
     isVisible !== true && css`
@@ -106,18 +127,19 @@ const DropdownItem = styled.div`
     active && css`
     background-color: #DEDEDE;
   `}
-  &:nth-child(1):hover {
-    border-radius: 5px 5px 0 0;
-  }
-
-  &:last-child:hover {
-    border-radius: 0 0 5px 5px;
-  }
 
   &:hover {
     background-color: #DEDEDE;
     outline: none;
   }
+
+  &:nth-child(1) {
+    border-radius: 5px 5px 0 0;
+  }
+
+  &:last-child {
+    border-radius: 0 0 5px 5px;
+  }
 `;
 
-export default Select
+export default SelectTask

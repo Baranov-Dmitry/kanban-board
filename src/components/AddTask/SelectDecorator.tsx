@@ -1,15 +1,15 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
-import Select from './SelectTask';
+import SelectTask from './SelectTask';
 
-const GetTasks = ({ id }: { id: string }) => {
+const SelectDecorator = ({ id, handleSelect }: { id: string, handleSelect: (id: string) => void }) => {
 
   const selectableTasks = useSelector((state: BoardsState) => state.boardsStore.boards.filter(board => board.title === id))[0]
   const valuesForSelect = selectableTasks.tasks.map(task => ({ id: task.id, text: task.text }))
 
   return (
-    <Select label="Select task" values={valuesForSelect} onChange={(e: any) => console.log(e)} />
+    <SelectTask label="Select task" values={valuesForSelect} handleSelect={handleSelect} />
   )
 }
 
-export default GetTasks
+export default SelectDecorator

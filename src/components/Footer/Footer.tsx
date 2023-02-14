@@ -1,8 +1,12 @@
 import React from 'react'
+import { useSelector } from 'react-redux';
 import styled from "styled-components";
 import { offsetPx } from '../../contants'
 
 const Footer = () => {
+
+  // const useSelector((state: BoardsState) => state.boardsStore.boards)
+
   return (
     <FooterContainer>
       <FlexContainer>
@@ -14,7 +18,7 @@ const Footer = () => {
   )
 }
 
-export const FooterContainer = styled.div`
+const FooterContainer = styled.div`
   width: calc(100% - ${offsetPx} * 2);
   height: 55px;
   background-color: #0067a3;
@@ -29,11 +33,11 @@ export const FooterContainer = styled.div`
   }
 `;
 
-export const FlexContainer = styled.div`
+const FlexContainer = styled.div`
   display: flex;
 `;
 
-export const SpanOffsetX2 = styled.div`
+const SpanOffsetX2 = styled.div`
   margin-left: calc(${offsetPx} * 2);
   margin-right: calc(${offsetPx} * 2);
 `;

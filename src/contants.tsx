@@ -1,4 +1,5 @@
 import { css } from 'styled-components';
+import { v4 as uuid } from 'uuid';
 
 export const offsetPx = "19px";
 
@@ -18,7 +19,6 @@ export interface TaskBoard {
 export interface Task {
   id: string,
   text: string,
-  done: boolean
 }
 
 export const boards: Array<TaskBoard> = [
@@ -27,14 +27,12 @@ export const boards: Array<TaskBoard> = [
     sourceOfTasks: null,
     tasks: [
       {
-        id: "1",
+        id: uuid(),
         text: "Login page – performance issues",
-        done: false
       },
       {
-        id: "2",
+        id: uuid(),
         text: "Sprint bugfix",
-        done: false
       },
     ]
   },
@@ -43,20 +41,46 @@ export const boards: Array<TaskBoard> = [
     sourceOfTasks: "Backlog",
     tasks: [
       {
-        id: "3",
+        id: uuid(),
         text: "Shop page – performance issues",
-        done: false
       },
       {
-        id: "4",
+        id: uuid(),
         text: "Checkout bugfix",
-        done: false
       },
       {
-        id: "5",
+        id: uuid(),
         text: "Shop bug1",
-        done: false
       },
     ]
   },
+  {
+    title: "In Progress",
+    sourceOfTasks: "Ready",
+    tasks: [
+      {
+        id: uuid(),
+        text: "User page – performance issues",
+      },
+      {
+        id: uuid(),
+        text: "Auth bugfix",
+      },
+    ]
+  },
+  {
+    title: "Finished",
+    sourceOfTasks: "In Progress",
+    tasks: [
+      {
+        id: uuid(),
+        text: "Main page – performance issues",
+      },
+      {
+        id: uuid(),
+        text: "Main page bugfix",
+      },
+    ],
+  },
+
 ]

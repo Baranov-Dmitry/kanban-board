@@ -48,7 +48,7 @@ export const ButtonSubmit = styled.button`
   }
 `
 
-const Error = styled.div`
+export const Error = styled.div`
   color: #e10b0b;
   font-size: 18px;
   margin-bottom: 10px;

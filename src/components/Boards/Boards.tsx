@@ -1,10 +1,7 @@
-import React, { useState } from 'react'
-import { boards as boardsSchema, TaskBoard } from "../../contants"
+import React from 'react'
 import styled from "styled-components";
 import BoardContainer from '../BoardContainer/BoardContainer';
 import { useSelector } from 'react-redux/es/exports';
-import { selectBoards } from '../reducer/boardsSlice';
-
 
 const Boards = () => {
 

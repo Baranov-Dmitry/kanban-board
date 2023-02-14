@@ -1,17 +1,20 @@
 import React from 'react'
 import styled from "styled-components";
-import { Task, TaskBoard } from "../../contants"
+import { hoverPointer, TaskBoard } from "../../contants"
 import AddTask from '../AddTask/AddTask';
-import Board from '../Board/Board';
 
-const BoardContainer = ({ title, sourceOfTasks, tasks, sourseTaskBoard }: any) => {
+interface Props extends TaskBoard {
+  title: string
+}
+
+const BoardContainer = ({ title, sourceOfTasks, tasks }: Props) => {
   return (
-    <BoardsTaskContainer key={title}>
+    <BoardsTaskContainer>
       <BoardsTaskTitle>
         {title}
       </BoardsTaskTitle>
-      {(tasks as Task[]).map(task => (
-        <Board key={task.id} text={task.text} />
+      {tasks.map(task => (
+        <Board key={task.id} >{task.text}</Board>
       ))}
       <AddTask boardName={title} sourceOfTasks={sourceOfTasks}></AddTask>
     </BoardsTaskContainer>
@@ -31,6 +34,22 @@ const BoardsTaskTitle = styled.div`
   font-family: "Roboto";
   font-style: normal;
   margin-bottom: 9px;
+`;
+
+const Board = styled.div`
+  background-color: #ffffff;
+  margin-top: 9px;
+  margin-bottom: 15px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 9px;
+  padding-right: 6px;
+  font-size: 18px;
+  line-height: 21px;
+  border-radius: 5px;
+  word-spacing: 0.3px;
+
+  ${hoverPointer}
 `;
 
 export default BoardContainer
