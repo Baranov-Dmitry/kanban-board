@@ -5,15 +5,17 @@ import { offsetPx } from '../../contants'
 
 const Footer = () => {
 
-  // const useSelector((state: BoardsState) => state.boardsStore.boards)
+  const boards = useSelector((state: BoardsState) => state.boardsStore.boards)
+  const lenghtReady = boards.find(board => board.title === "Ready")?.tasks.length
+  const lenghtFinished = boards.find(board => board.title === "Finished")?.tasks.length
 
   return (
     <FooterContainer>
       <FlexContainer>
-        <span>Active tasks: &lt;N&gt;</span>
-        <SpanOffsetX2>Finished tasks: &lt;M&gt;</SpanOffsetX2>
+        <span>Active tasks: &lt;{lenghtReady}&gt;</span>
+        <SpanOffsetX2>Finished tasks: &lt;{lenghtFinished}&gt;</SpanOffsetX2>
       </FlexContainer>
-      <span>Kanban board by &lt;NAME&gt;, &lt;YEAR&gt;</span>
+      <span>Kanban board by &lt;Baranov&gt;, &lt;2023&gt;</span>
     </FooterContainer>
   )
 }
