@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import styled from "styled-components";
 import { hoverPointer, TaskBoard } from "../../contants"
 import AddTask from '../AddTask/AddTask';
@@ -14,12 +15,20 @@ const BoardContainer = ({ title, sourceOfTasks, tasks }: Props) => {
         {title}
       </BoardsTaskTitle>
       {tasks.map(task => (
-        <Board key={task.id} >{task.text}</Board>
-      ))}
+        <Board key={task.id} >
+          <LinkStyled to={"/task/" + task.id}>{task.text}</LinkStyled>
+        </Board>
+      ))
+      }
       <AddTask boardName={title} sourceOfTasks={sourceOfTasks}></AddTask>
-    </BoardsTaskContainer>
+    </BoardsTaskContainer >
   )
 }
+
+const LinkStyled = styled(Link)`
+  text-decoration: none;
+  color: #000;
+`
 
 const BoardsTaskContainer = styled.div`
   width: 282px;
@@ -48,7 +57,7 @@ const Board = styled.div`
   line-height: 21px;
   border-radius: 5px;
   word-spacing: 0.3px;
-
+  
   ${hoverPointer}
 `;
 

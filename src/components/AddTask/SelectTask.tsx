@@ -63,15 +63,6 @@ const SelectTask = ({ label, values, handleSelect }: { label: string, values: { 
 
 }
 
-// function SomeTest() {
-//   let countries = ["USA", "Britain", "Germany", "India", "UAE"];
-//   return (
-//     <div className="App">
-//       <Select label="Choose country" values={countries} onChange={(e: any) => console.log(e)} />
-//     </div>
-//   );
-// }
-
 const SelectContainer = styled.div`
   position: relative;
   margin: 0;

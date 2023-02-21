@@ -6,6 +6,7 @@ import GlobalStyle from './styledGlobal';
 import { configureStore } from '@reduxjs/toolkit';
 import boardsSlice from './components/reducer/boardsSlice';
 import { Provider } from 'react-redux';
+import { BrowserRouter } from 'react-router-dom';
 
 const store = configureStore({
   reducer: {
@@ -24,7 +25,9 @@ const root = ReactDOM.createRoot(
 
 root.render(
   <Provider store={store}>
-    <GlobalStyle />
-    <App />
+    <BrowserRouter>
+      <GlobalStyle />
+      <App />
+    </BrowserRouter>
   </Provider>
 );

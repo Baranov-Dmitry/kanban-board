@@ -27,8 +27,4 @@ const FormSelect = ({ boardName, sourceOfTasks }: { boardName: string, sourceOfT
   )
 }
 
-const Option = styled.option`
-  
-`
-
 export default FormSelect
