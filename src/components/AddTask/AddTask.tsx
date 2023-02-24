@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useCallback, useState } from 'react'
 import { useDispatch } from 'react-redux/es/hooks/useDispatch';
 import styled from 'styled-components'
 import { hoverPointer } from '../../contants';
@@ -12,15 +12,30 @@ const AddTask = ({ boardName, sourceOfTasks }: { boardName: string, sourceOfTask
 
   const [showAddTask, setShowAddTask] = useState(false)
 
-  const handleAdd = (text: string) => {
-    dispatch(addNewTask({ boardName, text: text }))
-    setShowAddTask(prev => !prev)
-  }
+  const handleAdd = useCallback(
+    (text: string) => {
+      dispatch(addNewTask({ boardName, text: text }))
+      setShowAddTask(prev => !prev)
+    },
+    [],
+  )
 
-  const handleSelect = (id: string) => {
-    dispatch(moveTask({ id, from: sourceOfTasks, to: boardName, }))
-    setShowAddTask(prev => !prev)
-  }
+  // const handleAdd = (text: string) => {
+  //   dispatch(addNewTask({ boardName, text: text }))
+  //   setShowAddTask(prev => !prev)
+  // }
+  const handleSelect = useCallback(
+    (id: string) => {
+      dispatch(moveTask({ id, from: sourceOfTasks, to: boardName, }))
+      setShowAddTask(prev => !prev)
+    },
+    [],
+  )
+
+  // const handleSelect = (id: string) => {
+  //   dispatch(moveTask({ id, from: sourceOfTasks, to: boardName, }))
+  //   setShowAddTask(prev => !prev)
+  // }
 
   return (
     <>

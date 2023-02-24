@@ -44,8 +44,6 @@ const Header = () => {
     requestAnimationFrame(animate)
   }, [showMenu.changing])
 
-  console.log("render")
-
   return (
     <HeaderContanier>
       <HeaderTitle style={location.pathname === "/" ? { pointerEvents: "none" } : undefined} to="/">Awesome Kanban Board</HeaderTitle>
