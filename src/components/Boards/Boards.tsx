@@ -21,6 +21,7 @@ export const BoardsContainer = styled.div`
   display: flex;
   align-items: flex-start;
   align-content: flex-start;
+  flex-wrap: wrap;
   display: flex;
   gap: 24px;
   box-sizing: border-box;

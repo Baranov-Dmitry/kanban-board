@@ -1,7 +1,5 @@
 import React, { useRef } from 'react'
 import { useSelector } from 'react-redux'
-import styled from 'styled-components'
-import { TaskBoard } from '../../contants'
 import { ButtonSubmit } from './InputTask'
 
 const FormSelect = ({ boardName, sourceOfTasks }: { boardName: string, sourceOfTasks: string }) => {

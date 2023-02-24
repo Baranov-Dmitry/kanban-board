@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react'
+import { NavLink, useLocation } from 'react-router-dom';
 import styled from "styled-components";
 import { offsetPx } from "../../contants";
 const arrowDown = require("../../images/arrow-down.png");
@@ -6,6 +7,8 @@ const arrowUp = require("../../images/arrow-up.png");
 const userLogo = require('../../images/user-avatar.png')
 
 const Header = () => {
+
+  const location = useLocation()
   const [showMenu, setShowMenu] = useState({
     changing: false,
     show: false
@@ -45,7 +48,7 @@ const Header = () => {
 
   return (
     <HeaderContanier>
-      <HeaderTitle>Awesome Kanban Board</HeaderTitle>
+      <HeaderTitle style={location.pathname === "/" ? { pointerEvents: "none" } : undefined} to="/">Awesome Kanban Board</HeaderTitle>
       <HeaderLogoContainer>
         <HeaderBlueBG>
           <ContanerForClick onClick={() => setShowMenu(prev => ({ ...prev, changing: !prev.changing }))}>
@@ -80,18 +83,26 @@ const HeaderContanier = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+
+  @media (max-width: 400px) {
+    justify-content: flex-end;
+  }
 `;
 
-const HeaderTitle = styled.span`
+const HeaderTitle = styled(NavLink)`
+  text-decoration: none;
   font-family: "Roboto";
   font-weight: 400;
   font-size: 28px;
   line-height: 33px;
   color: #ffffff;
   margin-left: ${offsetPx};
-  @media (max-width: 440px) {
+  @media (max-width: 700px) {
     /* display: none; */
     font-size: 18px;
+  }
+  @media (max-width: 400px) {
+    display: none;
   }
 `;
 
@@ -103,11 +114,11 @@ const HeaderLogoContainer = styled.div`
   position: relative;
 `;
 
-const HeaderArrow = styled.div`
-  width: 24px;
-  height: 24px;
-  background-image: url(${arrowDown});
-`;
+// const HeaderArrow = styled.div`
+//   width: 24px;
+//   height: 24px;
+//   background-image: url(${arrowDown});
+// `;
 
 const HeaderMenuContainer = styled.div`
   position: absolute;
