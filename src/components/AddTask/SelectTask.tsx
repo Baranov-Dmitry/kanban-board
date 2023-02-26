@@ -86,6 +86,9 @@ const SelectLabelButton = styled.button.attrs({
   transition: 0.3s ease;
   text-align: left;
 
+  overflow: hidden; /* Обрезаем всё за пределами блока */
+  text-overflow: ellipsis; /* Добавляем многоточие */
+
   ${hoverPointer}
 
 `;
@@ -113,6 +116,9 @@ const DropdownItem = styled.div`
   padding-left: 9px;
   padding-right: 6px;
   box-sizing: border-box;
+
+  overflow: hidden; /* Обрезаем всё за пределами блока */
+  text-overflow: ellipsis; /* Добавляем многоточие */
 
   ${({ active }: { active: boolean }) =>
     active && css`

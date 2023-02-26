@@ -8,6 +8,8 @@ const userLogo = require('../../images/user-avatar.png')
 
 const Header = () => {
 
+  console.log("header")
+
   const location = useLocation()
   const [showMenu, setShowMenu] = useState({
     changing: false,

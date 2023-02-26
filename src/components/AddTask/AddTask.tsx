@@ -8,6 +8,8 @@ import InputTask from './InputTask';
 
 const AddTask = ({ boardName, sourceOfTasks }: { boardName: string, sourceOfTasks: string | null }) => {
 
+  console.log("AddTask")
+
   const dispatch = useDispatch()
 
   const [showAddTask, setShowAddTask] = useState(false)

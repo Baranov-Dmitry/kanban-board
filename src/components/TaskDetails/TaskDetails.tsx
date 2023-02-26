@@ -108,6 +108,8 @@ const Title = styled.div`
   padding: 10px 0;
   font-size: 24px;
   line-height: 28px;
+  overflow: hidden; /* Обрезаем всё за пределами блока */
+  text-overflow: ellipsis; /* Добавляем многоточие */
 `
 
 const Form = styled.form`

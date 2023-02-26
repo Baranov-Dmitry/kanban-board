@@ -9,6 +9,9 @@ interface Props extends TaskBoard {
 }
 
 const BoardContainer = ({ title, sourceOfTasks, tasks }: Props) => {
+
+  console.log("Render BoardContainer, = ", title)
+
   return (
     <BoardsTaskContainer>
       <BoardsTaskTitle>
@@ -28,6 +31,7 @@ const BoardContainer = ({ title, sourceOfTasks, tasks }: Props) => {
 const LinkStyled = styled(Link)`
   text-decoration: none;
   color: #000;
+  word-wrap: break-word;
 `
 
 const BoardsTaskContainer = styled.div`
@@ -61,4 +65,4 @@ const Board = styled.div`
   ${hoverPointer}
 `;
 
-export default BoardContainer
+export default React.memo(BoardContainer)
